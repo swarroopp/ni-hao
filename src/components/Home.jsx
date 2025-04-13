@@ -23,7 +23,7 @@ function Home() {
         <div className="nav">
           <div className="ocnt">
             <div className="logo">
-              <h2>SWAROOP MALLIDI</h2>
+              <AnimatedBox />
             </div>
             <div className="nav-links">
               <ul>

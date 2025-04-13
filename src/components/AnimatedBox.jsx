@@ -1,20 +1,8 @@
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function AnimatedBox() {
-    const [text, setText] = useState("SWAROOP");
-    const [textSize, setTextSize] = useState(32);
-    const [expanded, setExpanded] = useState(false);
-    
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setExpanded(true);
-            setText("SWAROOP MALLIDI");
-            setTextSize(24);
-        }, 1500); // Wait for sweep animation to finish
-        
-        return () => clearTimeout(timer);
-    }, []);
+    const [isAnimationComplete, setIsAnimationComplete] = useState(false);
     
     return (
         <div 
@@ -26,27 +14,23 @@ export default function AnimatedBox() {
                 overflow: "hidden",
                 padding: "8px",
                 margin: 0,
-                marginLeft: "20px", // Align with the About and Resume section
+                marginLeft: "20px",
                 textAlign: "left"
             }}
         >
-            {/* Text with gradient highlight */}
+            {/* Text always shows SWAROOP MALLIDI */}
             <motion.h1
                 style={{
-                    fontSize: `${textSize}px`,
+                    fontSize: "24px",
                     fontFamily: "Arial, sans-serif",
                     fontWeight: "bold",
                     margin: 0,
                     position: "relative",
                     display: "inline-block",
-                    color: "#ffffff"
+                    color: isAnimationComplete ? "#ffffff" : "#ffffff"
                 }}
-                animate={{ 
-                    fontSize: textSize
-                }}
-                transition={{ duration: 0.5 }}
             >
-                {text}
+                SWAROOP MALLIDI
                 
                 {/* Animated color sweep overlay */}
                 <motion.div
@@ -66,6 +50,7 @@ export default function AnimatedBox() {
                         duration: 1.2,
                         ease: "easeInOut"
                     }}
+                    onAnimationComplete={() => setIsAnimationComplete(true)}
                 />
             </motion.h1>
         </div>
