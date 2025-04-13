@@ -5,19 +5,21 @@ import AnimatedBox from "./AnimatedBox";
 import { IoOpenOutline } from "react-icons/io5";
 import Body from "./Body";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import SemicircleText from "./SemicircleText";
+
 
 function Home() {
+  const arcTextData = [
+    { text: "  ", color: "#ff0088" },
+    { text: "Symmetry", color: "#ff0088" },
+    { text: "Is", color: "#ffe4c4" },
+    { text: "Not", color: "#3F2828" },
+    { text: "Symmetric", color: "#ff0088" }
+  ];
+  
+
   return (
     <div className="home-wrapper">
-      {/* Lottie background */}
-      <div className="background-lottie">
-        <DotLottieReact
-          src="https://lottie.host/8f314386-ec4f-4a69-a2e0-c093235e4720/4xaWE3B7or.lottie"
-          loop
-          autoplay
-        />
-      </div>
-
       {/* Main content overlay */}
       <div className="content-overlay">
         <div className="nav">
@@ -42,6 +44,17 @@ function Home() {
           <Body />
         </div>
       </div>
+        <div className="lottie-arc-wrapper">
+    <DotLottieReact
+      src="https://lottie.host/8f314386-ec4f-4a69-a2e0-c093235e4720/4xaWE3B7or.lottie"
+      loop
+      autoplay
+      className="lottie-footer"
+    />
+    <SemicircleText data={arcTextData} />
+  </div>
+
+
     </div>
   );
 }
