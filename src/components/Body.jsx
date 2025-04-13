@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { GoArrowUpRight } from "react-icons/go";
 import { FaBars, FaTimes, FaGithub } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
+import { FaExternalLinkAlt } from "react-icons/fa";
 
 import './Body.css';
 
@@ -59,7 +60,7 @@ function Body() {
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
         <div className="mobile-menu-items">
           <a href="https://drive.google.com/file/d/1Q818tZtm9U7budARxuCB6e_YqUiP0W5k/view?usp=sharing" className="mobile-menu-item">
-            <div className="d-flex align-items-center">Resume <GoArrowUpRight size={20}/></div>
+            <div className="d-flex align-items-center">Resume <GoArrowUpRight size={25}/></div>
           </a>
           <div className="mobile-menu-item" onClick={() => navigate('/Projects')}>Projects</div>
           <div className="mobile-menu-item">About</div>
@@ -82,9 +83,11 @@ function Body() {
             Sounds depressing but thats what they say.
           </div> 
           <div className="desktop-only profiles">
+          <div className="btn resume d-flex">
             <a href="https://drive.google.com/file/d/1Q818tZtm9U7budARxuCB6e_YqUiP0W5k/view?usp=sharing">
-              <div className="btn resume">Resume <GoArrowUpRight size={20}/></div>
-            </a>
+              Resume <FaExternalLinkAlt size={16}/>
+            </a></div>
+
             <div className="btn" onClick={() => navigate('/Projects')}>Projects</div>      
           </div>
         </div>

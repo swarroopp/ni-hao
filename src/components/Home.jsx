@@ -20,17 +20,17 @@ function Home() {
 
       {/* Main content overlay */}
       <div className="content-overlay">
-        <div className="nav d-flex">
+        <div className="nav">
           <div className="ocnt">
-            <div className="h-2 svgp p-3">
-              <AnimatedBox />
+            <div className="logo">
+              <h2>SWAROOP MALLIDI</h2>
             </div>
-            <div className="ends">
+            <div className="nav-links">
               <ul>
                 <li>About</li>
                 <li>
-                  <a href="http://youtube.com/">
-                    Resume <IoOpenOutline />
+                  <a href="https://drive.google.com/file/d/1Q818tZtm9U7budARxuCB6e_YqUiP0W5k/view?usp=sharing">
+                    Resume <IoOpenOutline className="icon-open" />
                   </a>
                 </li>
               </ul>

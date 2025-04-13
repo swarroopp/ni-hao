@@ -25,7 +25,9 @@
 }
 
 .me {
-  gap: 20px;
+  gap: 5px;
+  width: 450px;
+
 }
 
 .hero-section {
@@ -93,6 +95,7 @@
 
 .btn:hover {
   background-color: #ff0088;
+  color: white;
 }
 
 .profiles {
@@ -105,9 +108,15 @@
 }
 
 .resume {
-  width: 90px;
+  width: 130px;
   justify-content: space-between;
+  text-decoration: none;
 }
+a {
+  color: inherit;           /* or use a specific color like 'black' */
+  text-decoration: none;
+}
+
 
 /* Mobile Menu */
 .menu-toggle {
@@ -365,7 +374,7 @@
   }
   
   .btn {
-    padding: 6px 15px;
+    padding: 9px 15px;
     font-size: 14px;
   }
 }

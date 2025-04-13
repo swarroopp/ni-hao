@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Projects.css";
 import AnimatedBox from "./AnimatedBox";
 import { IoLogoGithub } from "react-icons/io";
@@ -59,40 +59,105 @@ const projects = [
 ];
 
 function Projects() {
-  // Reference for animation
+  // State management for loading
+  const [pageReady, setPageReady] = useState(false);
+  const [lottieLoaded, setLottieLoaded] = useState(false);
   const projectsRef = useRef([]);
+  const observerRef = useRef(null);
 
-  // Setup intersection observer for scroll animations
+  // Handle initial page load and animation setup
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('appear');
-          }
+    // Prevent FOUC (Flash of Unstyled Content)
+    document.documentElement.classList.add('loading');
+    
+    // Preload all project images
+    const preloadImages = async () => {
+      const imagePromises = projects.map(project => {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.src = project.image;
+          img.onload = resolve;
+          img.onerror = resolve; // Continue even if image fails to load
         });
-      },
-      { threshold: 0.2 }
-    );
-
-    // Get all project cards and observe them
-    const projectElements = document.querySelectorAll('.project-card');
-    projectElements.forEach((el) => observer.observe(el));
-
-    // Cleanup
+      });
+      
+      try {
+        await Promise.all(imagePromises);
+      } catch (e) {
+        console.warn("Some images failed to preload", e);
+      }
+      
+      // Add a small delay to ensure smooth transition
+      setTimeout(() => {
+        setPageReady(true);
+        document.documentElement.classList.remove('loading');
+      }, 300);
+    };
+    
+    preloadImages();
+    
+    // Clean up function
     return () => {
-      projectElements.forEach((el) => observer.unobserve(el));
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
     };
   }, []);
 
+  // Setup intersection observer once page is ready
+  useEffect(() => {
+    if (!pageReady) return;
+    
+    // Create new intersection observer
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Add appear class with a slight delay to ensure smooth animation
+            setTimeout(() => {
+              entry.target.classList.add('appear');
+            }, 50);
+          }
+        });
+      },
+      { 
+        threshold: 0.15,
+        rootMargin: "0px 0px 100px 0px" // Trigger earlier
+      }
+    );
+    
+    // Observe all project cards
+    const projectElements = document.querySelectorAll('.project-card');
+    projectElements.forEach((el) => {
+      if (observerRef.current) {
+        observerRef.current.observe(el);
+      }
+    });
+    
+    return () => {
+      if (observerRef.current) {
+        projectElements.forEach((el) => {
+          if (observerRef.current) {
+            observerRef.current.unobserve(el);
+          }
+        });
+      }
+    };
+  }, [pageReady]);
+
   return (
-    <div className="projects-wrapper">
-      {/* Lottie background */}
-      <div className="background-lottie">
+    <div className={`projects-wrapper ${pageReady ? 'page-ready' : ''}`}>
+      {/* Lottie background with smoother transition */}
+      <div className={`background-lottie ${lottieLoaded ? 'lottie-loaded' : ''}`}>
         <DotLottieReact
           src="https://lottie.host/8f314386-ec4f-4a69-a2e0-c093235e4720/4xaWE3B7or.lottie"
           loop
           autoplay
+          onLoad={() => setLottieLoaded(true)}
+          renderSettings={{
+            preserveAspectRatio: 'xMidYMid slice',
+            renderer: 'svg'
+          }}
         />
       </div>
 
@@ -107,7 +172,7 @@ function Projects() {
               <ul>
                 <li className="nav-item">About</li>
                 <li className="nav-item">
-                  <a href="http://youtube.com/">
+                  <a href="https://drive.google.com/file/d/1Q818tZtm9U7budARxuCB6e_YqUiP0W5k/view?usp=sharing">
                     Resume <IoOpenOutline />
                   </a>
                 </li>
@@ -117,14 +182,17 @@ function Projects() {
         </div>
 
         <div className="projects-section">
-          <h2 className="section-title">My Projects</h2>
+          <h2 className={`section-title ${pageReady ? 'title-visible' : ''}`}>My Projects</h2>
           <div className="projects-container">
             {projects.map((project, index) => (
               <div 
                 className="project-card" 
                 key={index}
                 ref={el => projectsRef.current[index] = el}
-                style={{ animationDelay: `${index * 0.15}s` }}
+                style={{ 
+                  animationDelay: `${0.1 + index * 0.1}s`,
+                  backgroundImage: `url(${project.image})` // Preload background in invisible container
+                }}
               >
                 <div 
                   className="project-background" 

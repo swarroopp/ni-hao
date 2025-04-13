@@ -1,9 +1,25 @@
+/* Initial loading state */
+html.loading, body.loading {
+  background-color: black;
+  overflow: hidden;
+}
+
+html.loading * {
+  transition: none !important;
+}
+
 /* Projects.css - Main container styling */
 .projects-wrapper {
   position: relative;
   min-height: 100vh;
   width: 100vw;
+  background-color: black;
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}
 
+.projects-wrapper.page-ready {
+  opacity: 1;
 }
 
 /* Nav styling (matches Home) */
@@ -51,14 +67,22 @@
 }
 
 .h-2 {
-  margin-top: -70px;
+  margin-top: 0; /* Changed from -70px */
   padding-top: 0 !important;
+  display: flex;
+  align-items: center;
 }
-
 .svgp {
+  display: flex;
   justify-content: center;
   align-items: center;
-
+  padding: 0 !important; /* Remove padding that might affect alignment */
+}
+.animated-box-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 .nav {
@@ -80,8 +104,14 @@
   height: auto;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.4;
+  opacity: 0;
   filter: brightness(0.8) contrast(1.2);
+  transition: opacity 1s ease;
+  will-change: opacity;
+}
+
+.background-lottie.lottie-loaded {
+  opacity: 0.4;
 }
 
 /* Content overlay */
@@ -94,7 +124,7 @@
 /* Projects Section Styling */
 .projects-section {
   padding: 30px 0px;
-  margin:  10px auto 20px auto;
+  margin: 10px auto 20px auto;
   max-width: 1350px;
   background-color: black;
 }
@@ -109,27 +139,33 @@
   display: inline-block;
   left: 50%;
   transform: translateX(-50%);
-  animation: fadeIn 1s ease-out;
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+.section-title.title-visible {
+  opacity: 1;
+  animation: titleAppear 0.8s ease-out forwards;
 }
 
 .section-title::after {
   content: '';
   position: absolute;
   bottom: -10px;
-  left: 25%;
-  width: 50%;
+  left: 50%;
+  width: 0;
   height: 3px;
   background-color: #ff0088;
   border-radius: 2px;
-  animation: expandWidth 1.5s ease-out forwards;
+  transition: all 0.8s ease-out;
 }
 
-@keyframes expandWidth {
-  from { width: 0; left: 50%; }
-  to { width: 50%; left: 25%; }
+.section-title.title-visible::after {
+  width: 50%;
+  left: 25%;
 }
 
-@keyframes fadeIn {
+@keyframes titleAppear {
   from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
   to { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
@@ -137,9 +173,11 @@
 .projects-container {
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  padding: 0 30px;
+  gap: 45px;
+  padding: 20px 30px;
   background-color: black;
+  contain: content; /* Improves scrolling performance */
+  will-change: contents;
 }
 
 .project-card {
@@ -149,9 +187,20 @@
   height: 300px;
   width: 100%;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.6s ease;
   opacity: 0;
   transform: translateY(40px);
+  contain: strict; /* More aggressive performance optimization */
+  will-change: transform, opacity;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* Using cubic-bezier for smoother animation */
+}
+
+/* Prevent background flicker by hiding the parent element's background */
+.project-card {
+  background-size: 0 0;
+  background-repeat: no-repeat;
 }
 
 .project-card.appear {
@@ -171,6 +220,8 @@
   background-size: cover;
   background-position: center;
   transition: all 0.4s ease;
+  transform: translateZ(0); /* Force GPU acceleration */
+  backface-visibility: hidden; /* Prevent flicker */
 }
 
 .project-background::before {
@@ -203,6 +254,9 @@
   justify-content: space-between;
   padding: 20px;
   color: white;
+  /* Ensure content is always fully rendered to prevent flicker */
+  backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
 }
 
 .tech-tags {
@@ -216,12 +270,13 @@
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
   padding: 4px 10px;
-  
   border-radius: 20px;
   font-size: 0.75rem;
   font-weight: 500;
   backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  transform: translateZ(0); /* Force GPU acceleration */
 }
 
 .project-info {
@@ -236,7 +291,8 @@
   font-size: 1.8rem;
   font-weight: 700;
 }
-.project-title:hover{
+
+.project-title:hover {
   color: #fc3d9c;
   translate: x-2px;
 }
@@ -259,7 +315,6 @@
   display: flex;
   gap: 15px;
   margin-top: 10px;
-
 }
 
 .project-link {
@@ -273,10 +328,11 @@
   font-size: 1rem;
   font-weight: 500;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  background-color: rgba(0, 0, 0, 0.5);
-  transition: all 0.3s ease;
-  background-color:#ff0088;
+  background-color: #ff0088;
   color: #a0a0a0;
+  transition: all 0.3s ease;
+  backface-visibility: hidden; /* Prevents flickering during animations */
+  transform: translateZ(0);
 }
 
 .github-link {
@@ -294,27 +350,6 @@
   color: #ff0088;
 }
 
-/* Focused animation for appearing */
-@keyframes cardAppear {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.project-card {
-  animation: cardAppear 0.5s ease forwards;
-  animation-play-state: paused;
-}
-
-.project-card.appear {
-  animation-play-state: running;
-}
-
 /* Hide scrollbar but maintain scroll functionality */
 html {
   scrollbar-width: none; /* Firefox */
@@ -327,6 +362,7 @@ html::-webkit-scrollbar {
 body {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+  background-color: black; /* Ensure black background during loading */
 }
 
 /* Responsive design */
@@ -396,5 +432,29 @@ body {
   
   .project-card {
     height: 220px;
+  }
+}
+
+/* Add support for reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .project-card, .project-card.appear, .section-title, .background-lottie,
+  .projects-wrapper, .projects-wrapper.page-ready {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  .project-card {
+    opacity: 1;
+    transform: none;
+  }
+  
+  .section-title {
+    opacity: 1;
+  }
+  
+  .section-title::after {
+    width: 50%;
+    left: 25%;
+    transition: none;
   }
 }
