@@ -1,0 +1,84 @@
+  .ocnt {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Ensure items are vertically aligned */
+    padding: 20px 90px; /* Adjust padding for better spacing */
+  }
+
+  .ends ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 28px;
+  }
+
+  li {
+    list-style: none;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    color: gray ;
+  }
+
+  li:hover {
+    color: #ff0088;
+  }
+
+  a {
+    text-decoration: none; 
+    font-weight: bold;
+    color: gray;
+
+  }
+
+  a:hover {
+    color: #ff0088; /* Change color when hovering */
+  }
+
+  .h-2 {
+    margin-top: -70px;
+    padding-top: 0 !important;
+  }
+  .svgp{
+    justify-content: center;
+    align-items: center;
+  }
+
+  .nav {
+    background-color: black; /* Adjust color as needed */
+    padding: 10px 20px; /* Ensure padding is appropriate */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  /* LOTTIE BACKGROUND SUPPORT */
+  .home-wrapper {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+  }
+
+  .background-lottie {
+    position: absolute;
+    bottom: -80px; /* Moves animation downward */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50vw; /* Reduced width */
+    height: auto;
+    z-index: 0;
+    pointer-events: none; /* So it doesn't block interactions */
+    opacity: 0.4; /* Adjust transparency */
+    filter: brightness(0.8) contrast(1.2); /* Darken & add contrast for better blending */
+  }
+
+  /* Ensures content is above the animation */
+  .content-overlay {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+  }
+    
