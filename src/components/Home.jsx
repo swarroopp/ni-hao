@@ -7,7 +7,6 @@ import Body from "./Body";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import SemicircleText from "./SemicircleText";
 
-
 function Home() {
   const arcTextData = [
     { text: "  ", color: "#ff0088" },
@@ -16,7 +15,6 @@ function Home() {
     { text: "Not", color: "#3F2828" },
     { text: "Symmetric", color: "#ff0088" }
   ];
-  
 
   return (
     <div className="home-wrapper">
@@ -53,7 +51,6 @@ function Home() {
     />
     <SemicircleText data={arcTextData} />
   </div>
-
 
     </div>
   );

@@ -86,9 +86,10 @@ function Body() {
           <div className="btn resume d-flex">
             <a href="https://drive.google.com/file/d/1Q818tZtm9U7budARxuCB6e_YqUiP0W5k/view?usp=sharing">
               Resume <FaExternalLinkAlt size={16}/>
-            </a></div>
+            </a>
+            </div>
 
-            <div className="btn" onClick={() => navigate('/Projects')}>Projects</div>      
+            <div className="btn p-1" onClick={() => navigate('/Projects')}>Projects</div>      
           </div>
         </div>
 

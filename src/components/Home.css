@@ -32,20 +32,20 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  margin-top: 300px;
+  margin-top: 210px;
 }
 
 
 
 .lottie-footer {
   position: absolute;
-  bottom: 10px; /* slight lift up from bottom of wrapper */
+  bottom: 19px; /* slight lift up from bottom of wrapper */
   left: 50%;
   transform: translateX(-50%);
   width: 160px; /* can adjust to match SVG radius */
   z-index: 0;
   pointer-events: none;
-  width: 550px; /* increase this if it wraps the animation */
+  width: 580px; /* increase this if it wraps the animation */
 
 }
 
@@ -136,4 +136,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* Mobile view adjustments */
+@media screen and (max-width: 768px) {
+  .semicircle-text {
+    display: none; /* Hide the semicircular text on mobile */
+  }
+  
+  .lottie-arc-wrapper {
+    width: 100%; /* Make container responsive */
+    max-width: 400px; /* Limit maximum width */
+    height: 200px; /* Reduce height */
+    margin-top: 100px; /* Adjust top margin */
+  }
+  
+  .lottie-footer {
+    width: 250px; /* Reduce lottie animation size */
+  }
+  
+  .ocnt {
+    padding: 0 20px; /* Reduce padding on mobile */
+  }
 }
