@@ -37,7 +37,7 @@ const projects = [
     description: "A concept for a parallel system to manage seminar hall resources and reduce congestion.",
     image: "https://i.postimg.cc/cLXZMPN7/seminar-nihao.png",
     technologies: ["HTML", "CSS", "ReactJS", "clerk"],
-    link: "https://stalwart-cat-1329d9.netlify.app",
+    link: "https://seminarhall-vnrvjiet.vercel.app/",
     gitlink: "https://github.com/your-username/seminar-hall"
   },
   {
