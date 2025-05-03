@@ -85,14 +85,14 @@ function Body() {
           <div className="desktop-only profiles">
           <div className="btn resume d-flex">
             <a href="https://drive.google.com/file/d/1Q818tZtm9U7budARxuCB6e_YqUiP0W5k/view?usp=sharing">
-              Resume <FaExternalLinkAlt size={16}/>
+              Resume <FaExternalLinkAlt size={13}/>
             </a>
             </div>
 
             <div className="btn p-1" onClick={() => navigate('/Projects')}>Projects</div>      
           </div>
         </div>
-
+        <a href="https://open.spotify.com/track/3KkXRkHbMCARz0aVfEt68P">
         <div className="imge">
           <img 
             src="https://w0.peakpx.com/wallpaper/783/202/HD-wallpaper-spider-man-post-post-malone-spider-man-sunflower.jpg" 
@@ -100,6 +100,8 @@ function Body() {
             className="profile-img img-fluid"
           />
         </div>
+        </a>
+
       </div>
     </div>
   );

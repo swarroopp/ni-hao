@@ -53,7 +53,7 @@ const projects = [
     description: "A concept for a parallel system to manage Hoapitals an patient resources and reduce congestion.",
     image: "https://i.postimg.cc/15GhHXF1/Untitled-design-1.png",
     technologies: ["HTML", "CSS", "ReactJS", "clerk"],
-    link: "https://teal-parfait-bd880a.netlify.app/",
+    link: "https://parallel-hospital.netlify.app/",
     gitlink: "https://github.com/swarroopp/sswarroopp"
   }
 ];

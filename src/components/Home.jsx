@@ -42,7 +42,7 @@ function Home() {
           <Body />
         </div>
       </div>
-        <div className="lottie-arc-wrapper">
+    <div className="lottie-arc-wrapper">
     <DotLottieReact
       src="https://lottie.host/8f314386-ec4f-4a69-a2e0-c093235e4720/4xaWE3B7or.lottie"
       loop
@@ -51,8 +51,16 @@ function Home() {
     />
     <SemicircleText data={arcTextData} />
   </div>
+  <div className="scroll-projects">
+    <div className="titlep">
+    <h1 className="fs-1 projects-title">My Projects</h1>
+    </div>
+
+  </div>
+
 
     </div>
+
   );
 }
 
