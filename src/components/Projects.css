@@ -67,17 +67,19 @@ html.loading * {
 }
 
 .h-2 {
-  margin-top: 0; /* Changed from -70px */
+  margin-top: 0;
   padding-top: 0 !important;
   display: flex;
   align-items: center;
 }
+
 .svgp {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 !important; /* Remove padding that might affect alignment */
+  padding: 0 !important;
 }
+
 .animated-box-container {
   display: flex;
   align-items: center;
@@ -174,9 +176,9 @@ html.loading * {
   display: flex;
   flex-direction: column;
   gap: 45px;
-  padding: 20px 30px;
+  padding: 20px 0px;
   background-color: black;
-  contain: content; /* Improves scrolling performance */
+  contain: content;
   will-change: contents;
 }
 
@@ -188,40 +190,29 @@ html.loading * {
   width: 100%;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
   opacity: 0;
-  transform: translateY(40px);
-  contain: strict; /* More aggressive performance optimization */
-  will-change: transform, opacity;
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-              box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  /* Using cubic-bezier for smoother animation */
+  cursor: pointer;
+
 }
 
-/* Prevent background flicker by hiding the parent element's background */
-.project-card {
-  background-size: 0 0;
-  background-repeat: no-repeat;
-}
 
 .project-card.appear {
   opacity: 1;
-  transform: translateY(0);
 }
 
-.project-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6);
-}
+/* FIXED: Subtle hover effect to project-card */
+
 
 .project-background {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   transition: all 0.4s ease;
-  transform: translateZ(0); /* Force GPU acceleration */
-  backface-visibility: hidden; /* Prevent flicker */
+  backface-visibility: hidden;
 }
 
 .project-background::before {
@@ -232,16 +223,16 @@ html.loading * {
   width: 100%;
   height: 100%;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.85));
-  transition: background 0.4s ease;
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
 }
 
 .project-card:hover .project-background::before {
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8));
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7));
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(0px);
 }
+
 
 .project-content {
   position: absolute;
@@ -254,9 +245,11 @@ html.loading * {
   justify-content: space-between;
   padding: 20px;
   color: white;
-  /* Ensure content is always fully rendered to prevent flicker */
   backface-visibility: hidden;
   -webkit-font-smoothing: subpixel-antialiased;
+  /* FIXED: Ensure content allows pointer events */
+  pointer-events: auto;
+  z-index: 2;
 }
 
 .tech-tags {
@@ -264,6 +257,8 @@ html.loading * {
   flex-wrap: wrap;
   gap: 8px;
   transition: opacity 0.3s ease;
+  /* FIXED: Prevent tech tags from blocking clicks */
+  pointer-events: none;
 }
 
 .tech-tag {
@@ -276,25 +271,29 @@ html.loading * {
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  transform: translateZ(0); /* Force GPU acceleration */
+  transform: translateZ(0);
 }
 
 .project-info {
   margin-top: auto;
   margin-bottom: 40px;
-  transition: transform 0.3s ease;
+  /* FIXED: Ensure project info allows pointer events */
+  pointer-events: auto;
 }
+
+
 
 .project-title {
   color: #ff0088;
   margin-bottom: 8px;
   font-size: 1.8rem;
   font-weight: 700;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
-.project-title:hover {
+.project-card:hover .project-title {
   color: #fc3d9c;
-  translate: x-2px;
+  /* Removed transform - no sliding effect */
 }
 
 .project-description {
@@ -309,12 +308,21 @@ html.loading * {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   line-clamp: 3;
+  transition: color 0.3s ease;
+}
+
+.project-card:hover .project-description {
+  color: #ffffff;
 }
 
 .project-links {
   display: flex;
   gap: 15px;
   margin-top: 10px;
+  /* FIXED: Ensure links are clickable with proper z-index */
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
 }
 
 .project-link {
@@ -323,46 +331,61 @@ html.loading * {
   gap: 6px;
   color: white;
   text-decoration: none;
-  padding: 6px 14px;
+  padding: 8px 16px;
   border-radius: 25px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 500;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.3);
   background-color: #ff0088;
-  color: #a0a0a0;
   transition: all 0.3s ease;
-  backface-visibility: hidden; /* Prevents flickering during animations */
+  backface-visibility: hidden;
   transform: translateZ(0);
+  /* FIXED: Ensure links are clickable */
+  position: relative;
+  z-index: 10;
+  cursor: pointer;
 }
 
 .github-link {
   background-color: transparent;
+  color: #a0a0a0;
+  border-color: rgba(160, 160, 160, 0.5);
 }
 
 .project-link:hover {
   background-color: transparent;
   border-color: #ff0088;
+  color: #ff0088;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 0, 136, 0.3);
 }
 
 .github-link:hover {
-  background-color: transparent;
+  background-color: rgba(255, 0, 136, 0.1);
   border-color: #ff0088;
   color: #ff0088;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 0, 136, 0.2);
+}
+
+/* FIXED: Prevent link hover from affecting parent card hover */
+.project-link:hover {
+  z-index: 20;
 }
 
 /* Hide scrollbar but maintain scroll functionality */
 html {
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none;
 }
 
 html::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none;
 }
 
 body {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-  background-color: black; /* Ensure black background during loading */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  background-color: black;
 }
 
 /* Responsive design */
@@ -411,6 +434,15 @@ body {
     -webkit-line-clamp: 2;
     line-clamp: 2;
   }
+  
+  .project-links {
+    gap: 10px;
+  }
+  
+  .project-link {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -432,6 +464,16 @@ body {
   
   .project-card {
     height: 220px;
+  }
+  
+  .project-links {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .project-link {
+    justify-content: center;
+    width: 100%;
   }
 }
 

@@ -108,7 +108,20 @@
 .nav-links li:hover {
   color: #ff0088;
 }
-
+.capsule{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ff0088;
+  margin-bottom: 20px;
+  cursor: pointer;
+  width: fit-content;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 19px;
+  font-weight: bold;
+}
 .nav-links a {
   text-decoration: none;
   font-weight: bold;
@@ -134,6 +147,94 @@
 }
 .projects-title{
   color: cornsilk;
+}
+
+/* Add these styles to your Home.css file */
+
+.scroll-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  color: #a0a0a0;
+}
+
+.scroll-indicator:hover {
+  transform: translateY(5px);
+  color: #ff0088;
+}
+
+.scroll-arrow {
+  font-size: 1.5rem;
+  animation: bounceArrow 2s infinite;
+}
+
+.scroll-text {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-indicator:hover .scroll-text {
+  opacity: 1;
+}
+
+@keyframes bounceArrow {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(8px);
+  }
+  60% {
+    transform: translateY(4px);
+  }
+}
+
+/* Enhance the projects title */
+.projects-title {
+  color: #ff0088;
+  position: relative;
+  display: inline-block;
+}
+
+.projects-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #ff0088;
+  border-radius: 3px;
+  transform: scaleX(0.7);
+  transition: transform 0.5s ease;
+}
+
+.titlep:hover .projects-title::after {
+  transform: scaleX(1);
+}
+
+/* Ensure the lottie-arc-wrapper transitions smoothly to the projects section */
+.lottie-arc-wrapper {
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+/* On smaller screens, adjust sizes */
+@media (max-width: 768px) {
+  .scroll-arrow {
+    font-size: 1.2rem;
+  }
+  
+  .scroll-text {
+    font-size: 0.8rem;
+  }
 }
 
 /* Mobile view adjustments */

@@ -4,10 +4,11 @@ import AnimatedBox from "./AnimatedBox";
 import { IoLogoGithub } from "react-icons/io";
 import { IoOpenOutline } from "react-icons/io5";
 import { GoArrowUpRight } from "react-icons/go";
+import { useNavigate } from 'react-router-dom';
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 // Projects array kept exactly as original
-const projects = [
+  const projects = [
   {
     name: "Lumora",
     description: "LUMORA is a secure learning platform designed to streamline college-provided resources.",
@@ -49,8 +50,16 @@ const projects = [
     gitlink: "https://github.com/your-username/seminar-hall"
   },
   {
+    name: "Kaksya Sastra",
+    description: "A website for s=the official space club for my college.",
+    image: "https://i.postimg.cc/LsCDYv7m/Screenshot-2025-05-22-114959.png",
+    technologies: ["HTML", "CSS", "ReactJS"],
+    link: "https://kaksyasastra.vercel.app/",
+    gitlink: "https://github.com/"
+  },
+  {
     name: "Parallel Hospital",
-    description: "A concept for a parallel system to manage Hoapitals an patient resources and reduce congestion.",
+    description: "A concept for a parallel system to manage Hospitals and patient resources and reduce congestion.",
     image: "https://i.postimg.cc/15GhHXF1/Untitled-design-1.png",
     technologies: ["HTML", "CSS", "ReactJS", "clerk"],
     link: "https://parallel-hospital.netlify.app/",
@@ -60,6 +69,7 @@ const projects = [
 
 function Projects() {
   // State management for loading
+  const Navigate = useNavigate();
   const [pageReady, setPageReady] = useState(false);
   const [lottieLoaded, setLottieLoaded] = useState(false);
   const projectsRef = useRef([]);
@@ -67,7 +77,7 @@ function Projects() {
 
   // Handle initial page load and animation setup
   useEffect(() => {
-    // Prevent FOUC (Flash of Unstyled Content)
+    // Prevent FOUC (Flash of Unstyled Content) 
     document.documentElement.classList.add('loading');
     
     // Preload all project images
@@ -170,7 +180,7 @@ function Projects() {
             </div>
             <div className="ends">
               <ul>
-                <li className="nav-item">About</li>
+                <li className="nav-item"><div onClick={() => Navigate('/About')}>about</div></li>
                 <li className="nav-item">
                   <a href="https://drive.google.com/file/d/1Q818tZtm9U7budARxuCB6e_YqUiP0W5k/view?usp=sharing">
                     Resume <IoOpenOutline />

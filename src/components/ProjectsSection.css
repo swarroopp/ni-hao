@@ -1,0 +1,309 @@
+/* Background Animation */
+.background-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.background-animation svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Ensure reduced motion preferences are respected */
+@media (prefers-reduced-motion: reduce) {
+  .background-animation .animated-circles circle {
+    animation: none !important;
+  }
+}
+
+/* ProjectsSection.css - Additional styling for enhanced project cards */
+
+/* Card perspective effect */
+.project-card {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.project-card:hover .project-background {
+  transform: scale(1.05) translateZ(20px);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.project-card:hover .project-info {
+  transform: translateY(-5px) translateZ(30px);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Enhanced project card hover effects */
+.project-card:hover .project-background {
+  transform: scale(1.05);
+}
+
+.project-card:hover .project-info {
+  transform: translateY(-5px);
+}
+
+/* Glow effect for project title on hover */
+.project-title {
+  position: relative;
+  display: inline-block;
+  transition: all 0.3s ease;
+  color: #ff0088;
+  text-shadow: 0 0 1px rgba(255, 0, 136, 0.3);
+}
+
+.project-title::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #ff0088;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 8px rgba(255, 0, 136, 0.6);
+}
+
+.project-card:hover .project-title {
+  text-shadow: 0 0 8px rgba(255, 0, 136, 0.5);
+}
+
+.project-card:hover .project-title::after {
+  width: 100%;
+}
+
+/* Enhanced tag styling */
+.tech-tag {
+  transition: all 0.3s ease;
+  opacity: 0.8;
+}
+
+.project-card:hover .tech-tag {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+/* Subtle floating animation for cards */
+@keyframes floatAnimation {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+
+.project-card.appear:hover {
+  animation: floatAnimation 3s ease-in-out infinite;
+}
+
+/* Staggered animation for tech tags */
+.tech-tags {
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.project-card:hover .tech-tags {
+  opacity: 1;
+}
+
+/* Button hover effects */
+.project-link {
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.project-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 0, 136, 0.2);
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.project-link:hover::before {
+  left: 0;
+}
+
+.github-link::before {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Enhanced drop shadow for cards */
+.project-card {
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8);
+}
+
+.project-card:hover {
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.9), 
+              0 0 15px rgba(255, 0, 136, 0.2);
+}
+
+/* Improve focus state for accessibility */
+.project-link:focus {
+  outline: 2px solid #ff0088;
+  outline-offset: 2px;
+}
+
+/* Custom loader for project images */
+.project-background {
+  position: relative;
+  background-color: #1a1a1a;
+}
+
+.project-background::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+                              rgba(25, 25, 25, 0) 0%, 
+                              rgba(25, 25, 25, 0.2) 50%, 
+                              rgba(25, 25, 25, 0) 100%);
+  animation: loadingShimmer 1.5s infinite;
+  background-size: 200% 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-background.loading::after {
+  opacity: 1;
+}
+
+@keyframes loadingShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Adjust project card heights for larger screens */
+@media (min-width: 1200px) {
+  .projects-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+  
+  .project-card {
+    height: 350px;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .projects-container {
+    gap: 25px;
+    padding: 15px;
+  }
+  
+  .project-card {
+    height: 250px;
+    transform: none !important;
+    transition: opacity 0.4s ease, box-shadow 0.3s ease;
+  }
+  
+  .project-card:hover {
+    transform: none !important;
+  }
+  
+  .project-background {
+    transform: none !important;
+  }
+  
+  .project-card:hover .project-background {
+    transform: none !important;
+  }
+  
+  .project-description {
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    font-size: 0.85rem;
+  }
+  
+  .project-title {
+    font-size: 1.5rem;
+  }
+  
+  .tech-tag {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+  }
+  
+  .project-link {
+    padding: 4px 10px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .projects-container {
+    gap: 20px;
+    padding: 10px;
+  }
+  
+  .project-card {
+    height: 220px;
+  }
+  
+  .project-title {
+    font-size: 1.3rem;
+  }
+  
+  .project-description {
+    font-size: 0.8rem;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+  
+  .tech-tag {
+    font-size: 0.65rem;
+    padding: 2px 6px;
+  }
+  
+  .project-links {
+    gap: 10px;
+  }
+}
+
+/* Subtle transition effect between sections */
+.projects-wrapper {
+  position: relative;
+  padding-top: 60px;
+  margin-top: -30px;
+  z-index: 2;
+}
+
+/* Add a slight gradient overlay to the top of the projects section */
+.projects-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(to bottom, 
+                             rgba(0, 0, 0, 1) 0%,
+                             rgba(0, 0, 0, 0) 100%);
+  z-index: 1;
+}
+
+/* Enhanced title animation */
+@keyframes titleGlow {
+  0% { text-shadow: 0 0 5px rgba(255, 0, 136, 0.5); }
+  50% { text-shadow: 0 0 15px rgba(255, 0, 136, 0.8); }
+  100% { text-shadow: 0 0 5px rgba(255, 0, 136, 0.5); }
+}
+
+.section-title.title-visible {
+  animation: titleGlow 3s ease-in-out infinite, 
+             titleAppear 0.8s ease-out forwards;
+}
