@@ -80,8 +80,7 @@ function Body() {
           </div>
           <div className="small-text">
             I’m a web developer with a passion for turning ideas into interactive, accessible, 
-            and impactful digital experiences. Whether it’s clean code, intuitive design, or solving 
-            real-world problems through the web — this is where creativity meets functionality.
+            and impactful digital experiences. 
             Every project here is part of my journey to grow, build, and contribute to a better web.
           </div> 
           <div className="desktop-only profiles">
