@@ -61,7 +61,7 @@ function Body() {
       {/* Mobile Navigation Menu */}
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
         <div className="mobile-menu-items">
-          <a href="https://drive.google.com/file/d/1QbuG_pd1-ytjLgqxcMf5gf8krsy8b3mw/view?usp=sharing" className="mobile-menu-item">
+          <a href="https://drive.google.com/file/d/1Q818tZtm9U7budARxuCB6e_YqUiP0W5k/view?usp=sharing" className="mobile-menu-item">
             <div className="d-flex align-items-center">Resume <GoArrowUpRight size={25}/></div>
           </a>
           <div className="mobile-menu-item" onClick={() => navigate('/Projects')}>Projects</div>
