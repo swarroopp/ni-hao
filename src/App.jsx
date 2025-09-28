@@ -5,7 +5,7 @@ import './App.css';
 
 import Home from './components/Home.jsx';
 import Projects from './components/Projects.jsx';
-import About from './components/about.jsx';
+import About from './components/About.jsx';
 
 // Page transition variants
 const pageVariants = {
