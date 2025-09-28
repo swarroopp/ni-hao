@@ -154,14 +154,39 @@
   background-color: #2f363d;
 }
 
-.music-modal-content {
-  background-color: #1a1a1a;
+/* Music Modal Specific Styles */
+.music-modal .preview-modal-content {
+  max-width: 540px;
+  background-color: #1c1c1e;
   padding: 20px;
-  border-radius: 15px;
-  position: relative;
-  max-width: 700px;
-  width: 90%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
   animation: slideUp 0.3s ease;
+}
+
+.music-modal .close-button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 1;
+}
+
+.music-modal .close-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  transform: scale(1.1);
 }
 
 .close-button {

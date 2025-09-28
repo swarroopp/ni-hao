@@ -117,10 +117,18 @@ function Body() {
               <iframe 
                 allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" 
                 frameBorder="0" 
-                height="450" 
-                style={{width:'100%', maxWidth:'660px', overflow:'hidden', borderRadius:'10px'}} 
+                height="600" 
+                style={{
+                  width: '100%',
+                  maxWidth: '500px',
+                  background: 'transparent',
+                  overflow: 'hidden',
+                  borderRadius: '10px',
+                  margin: '0 auto',
+                  display: 'block'
+                }}
                 sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" 
-                src="https://embed.music.apple.com/in/playlist/favorite-songs/pl.u-pZU5WBEbxa"
+                src="https://embed.music.apple.com/in/playlist/favorite-songs/pl.u-pZU5WBEbxa?app=music&amp;itsct=music_box_player&amp;itscg=30200&amp;ls=1&amp;theme=dark"
               />
             </div>
           </div>
