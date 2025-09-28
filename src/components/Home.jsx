@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Home.css";
-import { motion } from "framer-motion";
+import "./animations.css";
+import { motion, AnimatePresence } from "framer-motion";
 import AnimatedBox from "./AnimatedBox";
 import { IoOpenOutline } from "react-icons/io5";
 import { FaChevronDown } from "react-icons/fa";
@@ -13,6 +14,8 @@ import { useNavigate } from 'react-router-dom';
 function Home() {
   const projectsRef = useRef(null);
   const navigate = useNavigate();
+  const [isVisible, setIsVisible] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(-1);
   
   const arcTextData = [
     { text: "  ", color: "#ff0088" },

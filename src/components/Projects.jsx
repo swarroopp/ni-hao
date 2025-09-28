@@ -72,6 +72,7 @@ function Projects() {
   const Navigate = useNavigate();
   const [pageReady, setPageReady] = useState(false);
   const [lottieLoaded, setLottieLoaded] = useState(false);
+  const [previewProject, setPreviewProject] = useState(null);
   const projectsRef = useRef([]);
   const observerRef = useRef(null);
 
@@ -87,7 +88,8 @@ function Projects() {
           const img = new Image();
           img.src = project.image;
           img.onload = resolve;
-          img.onerror = resolve; // Continue even if image fails to load
+          img.onerror = resolve;
+           // If t
         });
       });
       
@@ -221,9 +223,9 @@ function Projects() {
                       <p className="project-description">{project.description}</p>
                       
                       <div className="project-links">
-                        <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link">
+                        <button onClick={() => setPreviewProject(project)} className="project-link">
                           <span>View</span> <GoArrowUpRight size={16}/>
-                        </a>
+                        </button>
                         <a href={project.gitlink} target="_blank" rel="noopener noreferrer" className="project-link github-link">
                           <span>GitHub</span> <IoLogoGithub size={16}/>
                         </a>
@@ -236,6 +238,33 @@ function Projects() {
           </div>
         </div>
       </div>
+
+      {/* Project Preview Modal */}
+      {previewProject && (
+        <div className="preview-modal">
+          <div className="preview-modal-content project-preview">
+            <div className="preview-header">
+              <h3>{previewProject.name}</h3>
+              <button className="close-button" onClick={() => setPreviewProject(null)}>&times;</button>
+            </div>
+            <iframe
+              src={previewProject.link}
+              frameBorder="0"
+              allow="fullscreen"
+              loading="lazy"
+              title={previewProject.name}
+            />
+            <div className="preview-footer">
+              <a href={previewProject.link} target="_blank" rel="noopener noreferrer" className="preview-link">
+                Open in new tab <IoOpenOutline size={13}/>
+              </a>
+              <a href={previewProject.gitlink} target="_blank" rel="noopener noreferrer" className="preview-link github">
+                View on GitHub <IoLogoGithub size={16}/>
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

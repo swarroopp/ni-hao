@@ -23,30 +23,89 @@
 }
 
 /* ProjectsSection.css - Additional styling for enhanced project cards */
+.projects-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  overflow-x: hidden;
+}
 
 /* Card perspective effect */
 .project-card {
   perspective: 1000px;
   transform-style: preserve-3d;
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .project-card:hover .project-background {
-  transform: scale(1.05) translateZ(20px);
-  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  filter: brightness(1.1);
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .project-card:hover .project-info {
   transform: translateY(-5px) translateZ(30px);
-  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-/* Enhanced project card hover effects */
-.project-card:hover .project-background {
+/* Technology tags */
+.technology-tag {
+  padding: 4px 10px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+  opacity: 0.8;
+}
+
+.technology-tag:hover {
+  background: rgba(255, 255, 255, 0.2);
   transform: scale(1.05);
+  opacity: 1;
 }
 
-.project-card:hover .project-info {
-  transform: translateY(-5px);
+/* Project links */
+.project-links {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+.project-card:hover .project-links {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.project-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 /* Glow effect for project title on hover */

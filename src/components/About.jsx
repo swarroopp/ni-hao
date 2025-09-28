@@ -1,34 +1,46 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useInView, useAnimation } from 'framer-motion';
+import './animations.css';
+
+// Scroll to top helper function
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'instant'
+  });
+};
 
 // Animated Section Title Component
 const AnimatedSectionTitle = ({ children }) => {
-  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+  const controls = useAnimation();
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    const element = document.getElementById('timeline-title');
-    if (element) {
-      observer.observe(element);
+    if (isInView) {
+      controls.start('visible');
     }
+  }, [isInView, controls]);
 
-    return () => {
-      if (element) {
-        observer.unobserve(element);
+  const titleVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: 'easeOut'
       }
-    };
-  }, []);
+    }
+  };
 
   return (
-    <h2
-      id="timeline-title"
+    <motion.h2
+      ref={ref}
+      initial="hidden"
+      animate={controls}
+      variants={titleVariants}
+      className="animated-section-title"
       style={{
         color: 'white',
         textAlign: 'center',
@@ -41,25 +53,30 @@ const AnimatedSectionTitle = ({ children }) => {
       }}
     >
       {children}
-      <div
+      <motion.div
         style={{
           position: 'absolute',
           bottom: '-10px',
           left: 0,
-          width: isVisible ? '100%' : '0%',
+          width: '100%',
           height: '3px',
-          backgroundColor: '#ff0088',
-          borderRadius: '2px',
-          transition: 'width 0.8s ease-in-out',
-          transitionDelay: '0.2s'
+          transformOrigin: 'left',
+          backgroundColor: '#ff0088'
         }}
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: isInView ? 1 : 0 }}
+        transition={{ duration: 0.8, delay: 0.3 }}
       />
-    </h2>
+    </motion.h2>
   );
 };
 
 const About = () => {
   const [visibleItems, setVisibleItems] = useState(new Set());
+
+  useEffect(() => {
+    scrollToTop();
+  }, []);
   const [copied, setCopied] = useState(false);
   const email = "swaroopmallidi7777@gmail.com";
 

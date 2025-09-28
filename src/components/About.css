@@ -1,8 +1,26 @@
 /* About Component Styles */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .about-wrapper {
   background-color: #0d0d0d;
   min-height: 100vh;
   padding: 0;
+  position: relative;
+  top: 0;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
 }
 
 /* Header with AnimatedBox */
@@ -16,6 +34,24 @@
   border-radius: 10px;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 0, 136, 0.2);
+  transition: all 0.3s ease;
+  transform: translateX(-100%);
+  animation: slideIn 0.6s ease forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.about-header:hover {
+  border-color: rgba(255, 0, 136, 0.4);
+  box-shadow: 0 0 20px rgba(255, 0, 136, 0.2);
+  transform: translateX(0) scale(1.02);
 }
 
 .about-container {
@@ -28,6 +64,67 @@
   background-color: rgb(22, 19, 19);
   border-radius: 20px;
   padding: 40px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: contentFadeIn 1s ease forwards 0.3s;
+  transition: all 0.3s ease;
+}
+
+@keyframes contentFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.about-content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(255, 0, 136, 0.1);
+}
+
+/* Skill item animations */
+.skill-item {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.4s ease;
+}
+
+.skill-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.skill-progress-bar {
+  position: relative;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.skill-progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #ff0088, #ff4d94);
+  transform-origin: left;
+  transition: transform 1s ease-out;
+}
+
+.skill-name {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.skill-item:hover .skill-name {
+  transform: translateX(5px);
+  color: #ff0088;
   margin-bottom: 60px;
 }
 

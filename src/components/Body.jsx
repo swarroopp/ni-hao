@@ -43,6 +43,8 @@ const projects = [
 
 function Body() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showMusic, setShowMusic] = useState(false);
+  const [previewProject, setPreviewProject] = useState(null);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -63,7 +65,11 @@ function Body() {
             <div className="d-flex align-items-center">Resume <GoArrowUpRight size={25}/></div>
           </a>
           <div className="mobile-menu-item" onClick={() => navigate('/Projects')}>Projects</div>
-          <div className="mobile-menu-item">About</div>
+          <div className="mobile-menu-item" onClick={() => { 
+              navigate('/about'); 
+              setMenuOpen(false); 
+              window.scrollTo(0, 0);
+            }}>About</div>
         </div>
       </div>
 
@@ -79,28 +85,71 @@ function Body() {
             </span>
           </div>
           <div className="small-text">
-            This is my portfolio. I am a useless man with no reason to be alive.
-            Sounds depressing but thats what they say.
+            This is my portfolio. I dont know what to put here lol.
           </div> 
           <div className="desktop-only profiles">
-          <div className="btn resume d-flex">
-            <a href="https://drive.google.com/file/d/1Q818tZtm9U7budARxuCB6e_YqUiP0W5k/view?usp=sharing">
-              Resume <FaExternalLinkAlt size={13}/>
-            </a>
+            <div className="btn resume d-flex">
+              <a href="https://drive.google.com/file/d/1Q818tZtm9U7budARxuCB6e_YqUiP0W5k/view?usp=sharing">
+                Resume <FaExternalLinkAlt size={13}/>
+              </a>
             </div>
 
-            <div className="btn p-1" onClick={() => navigate('/Projects')}>Projects</div>      
+            <div className="btn p-1" onClick={() => navigate('/Projects')}>
+              Projects
+            </div>      
           </div>
         </div>
-        <a href="https://open.spotify.com/track/3KkXRkHbMCARz0aVfEt68P">
-        <div className="imge">
+        <div onClick={() => setShowMusic(!showMusic)} className="imge" style={{ cursor: 'pointer' }}>
           <img 
             src="https://w0.peakpx.com/wallpaper/783/202/HD-wallpaper-spider-man-post-post-malone-spider-man-sunflower.jpg" 
             alt="Spider-Man Art"
             className="profile-img img-fluid"
           />
         </div>
-        </a>
+
+        {/* Music Player Modal */}
+        {showMusic && (
+          <div className="preview-modal music-modal">
+            <div className="preview-modal-content music-modal-content">
+              <button className="close-button" onClick={() => setShowMusic(false)}>&times;</button>
+              <iframe 
+                allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" 
+                frameBorder="0" 
+                height="450" 
+                style={{width:'100%', maxWidth:'660px', overflow:'hidden', borderRadius:'10px'}} 
+                sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" 
+                src="https://embed.music.apple.com/in/playlist/favorite-songs/pl.u-pZU5WBEbxa"
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Project Preview Modal */}
+        {previewProject && (
+          <div className="preview-modal">
+            <div className="preview-modal-content project-preview">
+              <div className="preview-header">
+                <h3>{previewProject.name}</h3>
+                <button className="close-button" onClick={() => setPreviewProject(null)}>&times;</button>
+              </div>
+              <iframe
+                src={previewProject.link}
+                frameBorder="0"
+                allow="fullscreen"
+                loading="lazy"
+                title={previewProject.name}
+              />
+              <div className="preview-footer">
+                <a href={previewProject.link} target="_blank" rel="noopener noreferrer" className="preview-link">
+                  Open in new tab <FaExternalLinkAlt size={13}/>
+                </a>
+                <a href={previewProject.gitlink} target="_blank" rel="noopener noreferrer" className="preview-link github">
+                  View on GitHub <FaGithub size={16}/>
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
 
       </div>
     </div>

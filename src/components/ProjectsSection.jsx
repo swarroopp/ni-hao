@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { IoOpenOutline } from "react-icons/io5";
 import { FaGithub } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
 import "./ProjectsSection.css";
 import BackgroundAnimation from "./BackgroundAnimation";
 
@@ -68,6 +69,7 @@ function ProjectsSection() {
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
   const projectRefs = useRef([]);
+  const [hoveredProject, setHoveredProject] = useState(null);
 
   // Preload images to prevent layout shifts
   const preloadImages = () => {
@@ -160,7 +162,7 @@ function ProjectsSection() {
       <BackgroundAnimation />
       
       {/* Background lottie animation */}
-      <div className="background-lottie"></div>="projects-wrapper"
+      <div className="background-lottie"></div>"
       {/* Background lottie animation */}
       <div className="background-lottie"></div>
       

@@ -1,9 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
-*{
+* {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-    font-family: "Roboto Mono", monospace;
+  font-family: "Roboto Mono", monospace;
+}
+
+/* Text selection styles */
+::selection {
+  background-color: yellow;
+  color: black;
+}
+
+::-moz-selection {
+  background-color: yellow;
+  color: black;
+}
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+#root {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
 }
 :root {
   --primary-color: #ff0088;
@@ -14,4 +37,54 @@
 }
 body{
   background-color: black;
+}
+
+/* Page Transition Styles */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prevent FOUC during page transitions */
+.page-transition {
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Animation utilities */
+.fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
