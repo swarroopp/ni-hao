@@ -61,7 +61,7 @@ function Body() {
       {/* Mobile Navigation Menu */}
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
         <div className="mobile-menu-items">
-          <a href="https://drive.google.com/file/d/1Q818tZtm9U7budARxuCB6e_YqUiP0W5k/view?usp=sharing" className="mobile-menu-item">
+          <a href="https://drive.google.com/file/d/1QbuG_pd1-ytjLgqxcMf5gf8krsy8b3mw/view?usp=sharing" className="mobile-menu-item">
             <div className="d-flex align-items-center">Resume <GoArrowUpRight size={25}/></div>
           </a>
           <div className="mobile-menu-item" onClick={() => navigate('/Projects')}>Projects</div>
@@ -85,7 +85,9 @@ function Body() {
             </span>
           </div>
           <div className="small-text">
-            This is my portfolio. I dont know what to put here lol.
+            I’m a web developer with a passion for turning ideas into interactive, accessible, 
+            and impactful digital experiences.
+            Every project here is part of my journey to grow, build, and contribute to a better web.
           </div> 
           <div className="desktop-only profiles">
             <div className="btn resume d-flex">
