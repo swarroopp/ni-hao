@@ -81,14 +81,10 @@
   display: flex;
   gap: 15px;
   margin-top: 15px;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: all 0.3s ease;
-}
-
-.project-card:hover .project-links {
+  /* Always visible: removed hover-only reveal */
   opacity: 1;
   transform: translateY(0);
+  transition: none;
 }
 
 .project-link {

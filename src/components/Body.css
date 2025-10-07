@@ -157,7 +157,8 @@
 /* Music Modal Specific Styles */
 .music-modal .preview-modal-content {
   max-width: 540px;
-  background-color: #1c1c1e;
+  height: 480px;
+  /* background-color: #1c1c1e; */
   padding: 20px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
   border-radius: 12px;
@@ -166,15 +167,15 @@
 
 .music-modal .close-button {
   position: absolute;
-  right: 10px;
-  top: 10px;
-  background: rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.8);
+  right: 7px;
+  top: 7px;
+  background: rgba(236, 2, 2, 0.1);
+  color: rgba(235, 8, 8, 0.8);
   border: none;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  font-size: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -183,11 +184,7 @@
   z-index: 1;
 }
 
-.music-modal .close-button:hover {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  transform: scale(1.1);
-}
+
 
 .close-button {
   position: absolute;
@@ -195,7 +192,7 @@
   right: 0;
   background: none;
   border: none;
-  color: white;
+  /* color: white; */
   font-size: 30px;
   cursor: pointer;
   padding: 5px;
